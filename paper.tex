@@ -30,6 +30,9 @@
 Abstract goes here
 \end{abstract}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{What do we aim for?}
 
 Human social dynamics rely upon the ability to effectively attribute beliefs,
@@ -45,10 +48,68 @@ cognitive skills to social robots is an important research objective.
 
 Understanding and predicting one's behaviour.
 
+An integrated theory of social cognition, applicable to robots
+
+A principled yet workable approach to social cognition for artificial intelligence
+
+
+\subsection{Problem Statement}
+
+
+Symbolic approaches to social cognition work by first building a mental model of the
+interacting humans. This is typically done by a combination of 3D situation
+assessment (the robot builds and update a semantic 3D model of its environment)
+and visual perspective taking (based on the estimation of the pose of the human
+head). This permits the computation of allocentric, and more importantly,
+egocentric spatial relations between the spatial entities in the environment
+(we call it \emph{social situation assessment}).
+
+This geometric computations are then turned into symbolic representations,
+typically using logical statements (embedded in logic
+programming~\cite{tenorth2009knowrob} or ontologies~\cite{lemaignan2010oro}).
+
+The robot creates and continuously updates one symbolic model per
+agent~\cite{lemaignan2010oro}. These models are then used by other cognitive
+processes (task planning, dialogue, task execution supervision) that are
+designed to take advantage of the agents' knowledge models to produce
+socially-aware behaviours: for example, the task planner may plan manipulation
+task using only entities visible to the human~\cite{lallement2014hatp}, or the
+dialogue manager may use the specific knowledge model of the speaker to
+interpret the speech, avoiding grounding ambiguities that might otherwise
+occur~\cite{lemaignan2011grounding}.
+
+This works well as long as we limit ourselves to the manipulation of the results
+of visual perspective taking. However, one intuitively recognizes that social
+modelling goes indeed beyond computing what the human perceives or does not
+perceive. This has been clearly recognized in developmental psychology, for
+instance with Flavell's distinction between \emph{cognitive connections} on one
+hand, and \emph{mental representations} on the other hand (we will come back to
+Flavell's \emph{connection-representation} account in
+section~\ref{connection-representation}). Now, if we are to model someone else's
+mind beyond a naive geometric model of their perception, we indeed enter the
+realm of \emph{representations}. What are they? How to access them? How to
+represent and manipulate them? These three questions lay at the core of this
+work, and as such we effectively take over the point we previously made
+in~\cite{lemaignan2015mutual}:  we ultimately want to come up with a
+meta-representational cognitive system to \emph{represents
+representations} (including representations of \emph{false} beliefs or unknown
+facts, \ie suppositions).
+
+We must immediately clarify that, even though this goal may seem to pre-suppose
+\emph{symbolic} meta-representations, this is not the case: at that stage, we do
+not have evidence that a particular kind of computational structure may better
+support the representation and manipulation of mental representations.
+
+\subsection{From Social Attention to Social Modelling}
+
+The hypothesis that we hereafter develop and turn into a cognitive model is the
+following: mental representations are snapshots of awareness, awareness being
+itself a label for the memory-mediated process of attention.
+
 
 \subsection{Surface Alignment vs Deep Grounding}
 
-\citet{pickering2006alignment} argue that mutual understanding
+Pickering and Garrod~\cite{pickering2006alignment} argue that mutual understanding
 starts mostly with a \emph{superficial alignment} at the level of the linguistic
 representations, due to priming mechanisms, and that this local alignment may --
 in some cases -- lead to a \emph{global alignment} of the semantic level
@@ -67,6 +128,9 @@ radical misalignment becomes apparent).~\citep[p.179]{pickering2006alignment}
 
 \subsection{Theory of Mind}
 
+We previously covered the state of the research on theory of mind in social
+robotics~\cite{lemaignan2015mutual}.
+
 In~\cite{scassellati2002theory}, Scassellati gave
 an initial account of Leslie's and Baron-Cohen's respective models of the
 emergence of a theory of mind (we discuss them below) from the perspective of
@@ -82,19 +146,70 @@ Ros~\cite{Ros2010}).
 Based on perspective taking \emph{Level 1} alone, Breazeal
 \etal\cite{breazeal2009embodied} and Warnier \etal\cite{warnier2012when}
 successfully tackled the classical hallmark of theory of mind, the false belief
-experiment (also known as the ``Sally and Anne'' experiment,
-Figure~\ref{false-beliefs}, introduced by~\cite{wimmer1983beliefs}, original
-experimental setting by~\cite{baron1985does}). They demonstrated complete
-human-robot interaction scenarios where robots recognize and handle false belief
-situations in dyadic or triadic interactions, and exhibit helping behaviours
-that account for the missing/false beliefs of the human partners.
+experiment (also known as the ``Sally and Anne'' experiment, introduced
+by~\cite{wimmer1983beliefs}, original experimental setting
+by~\cite{baron1985does}). They demonstrated complete human-robot interaction
+scenarios where robots recognize and handle false belief situations in dyadic or
+triadic interactions, and exhibit helping behaviours that account for the
+missing/false beliefs of the human partners.
+
+\cite{devin2016implemented}
 
 
-\section{A Cognitive Model of Social Awareness for Robots}
 
-\subsection{The Attention Schemata Theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Foundations of the Socio-cognitive Awareness for Robots}
 
-Our approach draws form the \emph{Attention Schemata Theory}, proposed by
+\subsection{Connections vs. representations}
+\label{connection-representation}
+
+In~\cite{flavell1990developmental}, Flavell relates perspective taking
+\emph{Level 1} to establishing \emph{cognitive connections} (I see, I hear, I
+want, I like, I fear...), in contrast to perspective taking \emph{Level 2} that
+relates to manipulating \emph{representations}.  This is exemplified by
+\emph{appearance-reality} tasks, like the \emph{elephant mask} experiment
+proposed in~\cite{flavell1990developmental}: 3-years old children are not able
+to tell that an experimenter hidden behind a large elephant mask but who speaks
+normally \emph{looks} like an elephant, \emph{sounds} like the experimenter, and
+\emph{really is} the experimenter.  It appears that, while those children are
+able to explicitly manipulate cognitive connections (they know for instance that
+these are largely independent of each other and that they can evolve over time)
+and know as well that their own connections are independent of those of other
+people, they do not think that one concept can \emph{seriously} (\ie non
+playfully) hold several, possibly conflicting, representations.
+
+
+\subsection{Phenomenal \vs Access Consciousness}
+
+Neuroscientist view: Block's proposal of two kind of consciousness~\cite{block1996can}:
+\emph{phenomenal} consciousness as the raw inner experience; \emph{access}
+consciousness as the more abstract, cognitive ability to think about and report
+on those experiences.
+
+Does this map to the traditional sub-symbolic/symbolic divide that we observe in
+artificial intelligence, and in particular in robotics?
+
+The \emph{phenomenal consciousness} would then be the immediate raw perceptual
+inputs: video streams from cameras, readings for torque and force sensors, joint
+positions, etc.
+
+The \emph{access consciousness} would typically be the symbolic representation
+of these inputs.
+
+
+We must however keep in mind that there is likely no such rigid dichotomy
+between phenomenal consciousness and access consciousness. It is rather a
+continuum of processing~\citep[p.55]{graziano2013consciousness}
+
+Recursivity of consciousness: if I'm looking at a green apple, my cognitive
+machinery can decide and report that I'm aware of green. I can also be aware of
+the deciding and aware of the reporting~\citep[p.55]{graziano2013consciousness}.
+
+\subsection{The Attention Schema Theory}
+
+Our approach draws form the \emph{Attention Schema Theory}, proposed by
 Grazino~\cite{graziano2013consciousness}.
 
 What awareness can do? ``the brain \emph{does} attention, but \emph{knows}
@@ -102,26 +217,43 @@ awareness'': as such, ``awareness can in principle be verbally reported''.
 
 
 
-\subsection{Associative Memory Network}
+\subsection{Associative Memory Networks}
 
 
 In particular, used for behavioural alignment
 
-\subsection{The Robotic Social Awareness Model}
+\subsection{Semantic Networks}
+
+Ontologies and other Knowledge Representation and Reasoning systems.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Robotic Social Awareness Model}
+
+\subsection{Overview}
 
 Associative Memory as an Informational Proxy for the Attention System
 
 
 \begin{enumerate}
     \item Perceptual inputs feed in an associative memory
-    \item the resulting set of pre-activated units is labelled as the current
-        \emph{focus of attention}
-    \item According to the Attention Schemata Theory, by \emph{explicitely}
-        labelling these units as being attended, we make the robot \emph{aware}
-        of the corresponding phenomenons.
+
+    \item the resulting set of pre-activated units is the current
+        \emph{focus of attention} -- this step may require dimensionality
+        reduction techniques
+
+    \item According to the Attention Schema Theory, by \emph{explicitely}
+        labelling the activated and pre-activated units as being attended, we
+        make the robot \emph{aware} of the corresponding phenomenons.
+
+    \item The labelling occurs by the mean of a symbolic association within a
+        semantic network (ontology)
+
 \end{enumerate}
 
-\section{Attention}
+\subsection{Attention}
 
 Modelled as a \emph{Biased Competition Model of
 Attention}~\cite{desimone1995neural}.
@@ -166,7 +298,7 @@ additional top-down biasing mechanism.
 
 
 
-\subsection{Biasing Mechanisms}
+\subsubsection{Biasing Mechanisms}
 
 Biasing competition~\cite{beck2009top}
 
@@ -182,7 +314,7 @@ high-level processes is unclear, but might be of symbolic nature.
 
 
 
-\section{Social Attention}
+\subsection{Social Attention}
 
 What do we call the \emph{attention state} of a partner?
 
@@ -200,18 +332,48 @@ Cues from which we reconstruct someone else's attentional state (from Graziano):
     \item location of salient objects
 \end{itemize}
 
+\subsection{What is the contribution, the novelty?}
 
-\section{The functional pre-requisites for social robots}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What Does the Model Predict?}
+
+\subsection{Behavioural Alignment}
+\subsection{Verbalization of the (Social) Attentional Process}
+\subsection{False-beliefs}
+
+\subsection{Symbol Grounding}
+
+\subsection{Recursive Awareness}
+
+I can describe what I'm aware of, I can also recursively be aware I'm describing
+my state of awareness, and I can verbalize this second order awareness.
+
+This should work \emph{Attention Schema} theory because the attention schema
+is seen as a regular sensory
+representation~\citep[p.55]{graziano2013consciousness}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Functional Pre-Requisites for Social Robots}
 
 \subsection{Social Assessment}
-\subsubsection{Gaze direction}
-\subsubsection{Facial and body expressions}
+\subsubsection{Gaze Direction}
+\subsubsection{Facial and Body Expressions}
 \subsubsection{Gestures}
 
 \subsection{Situation Assessment}
 
 Including saliency information
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Evaluation of the Model}
 
 \subsection{Does it perform as well as Symbolic Architectures?}
