@@ -27,7 +27,89 @@
 \maketitle
 
 \begin{abstract}
-Abstract goes here
+
+My current perspective could be summarized as:
+
+1- mental representations are snapshots of what we are aware of;
+
+2- awareness is the label we conveniently put on the process of attention;
+
+3- attention at time t is the label we put on the set of the activated units in
+a (biased) associative memory network;
+
+4- modelling others’ mental representations is taking snapshots of their own
+current state of awareness;
+
+5- modelling other’s state of awareness, ie, their current attentional process,
+is mediated by one’s own attentional system, typically through joint attention
+mechanisms;
+
+6- Points 1 to 5 essentially refer to a 'phenomenal' awareness (a 'raw' inner
+experience). 'Phenomenal' awareness can be turned into 'access' consciousness
+(the abstract, cognitive ability to reflect on the inner experience);
+
+7- In robots, 'access consciousness' can be mapped to symbolic, logic
+representations.
+
+(2) is Graziano's Attention Schemata Theory; (3) is based on Biased Competition
+Model of Attention, Desimone and Duncan 1995; (6) comes from Block 1996.
+
+As you hopefully see, this drafts a sub-symbolic/symbolic hybrid model of
+cognition that puts (social) attention at the centre of social cognition.
+
+Some of the main 'gaps' are:
+
+- mental representations are likely not simply instantaneous 'snapshots' --
+even though I could argue that they indirectly embed a notion of time and
+history as they are snapshots of activated units in an associative memory
+network;
+
+- equating attention to a set of activated units in a memory network raises
+questions regarding the nature of these units: physical entities? active
+interaction modalities? ...? In particular, the right level of abstraction of
+these units is not immediately clear: the spectrum is rather large, from raw
+perceptual inputs 'à la Tony Morse' to high-level units like objects, joint
+gazing, etc.
+
+- the Biased Competition Model of Attention supports interesting bottom-up and
+top-down biasing mechanisms: bottom-up is quite clear (if a unit is activated
+longer/stronger, it biases the resulting attention to this unit. Top-down is
+less clear (but also potentially very interesting as it closes the loop between
+the sub-symbolic and symbolic models): how more abstract cognitive process can
+influence the memory network to bias the attention process?
+
+- the access to other's mental representations is mediated by one's own
+attentional system: the consequences of this mediation are not immediately
+clear
+
+- I conveniently map the split between 'phenomenal consciousness' and 'access
+consciousness' respectively to sub-symbolic and symbolic computational
+structures. This need to be better evidenced, if only because the frontier
+between phenomenal and access consciousness is all be clear (as pointed by
+Graziano).
+
+- It is not yet clear how the sub-symbolic and symbolic models of the different
+agent co-exist: is each agent a different unit in the same associative network?
+one associative memory per agent? what about the symbolic level?
+
+Now, as we discussed many times, the model is of little interest if it does not
+have some predictive power.
+
+Here a few social behaviours that I would like a robot to exhibit if endowed
+with such a model -- Not proper predictions, though.
+
+- behavioural alignment -> surface alignment and/or global alignment -> the
+original 'maze' task by Pickering and Garrod is certainly relevant here: every
+time you play the same game with the same person, the interaction is more fluid
+- ability to pass false-belief tasks, including non-physical, abstract ones, -
+recursive awareness: being aware of being aware -- typically evidenced by being
+able to describe/verbalize its own state of awareness - 'natural' turn-taking:
+I 'just' know when it is my turn to act - 'natural' protodeclarative pointing:
+I 'just' know when I really need to draw your attention on something
+
+The word 'just' is clearly the key here: these capabilities should be natural
+in the sense that they naturally follow from the model. 
+
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,7 +132,7 @@ Understanding and predicting one's behaviour.
 
 An integrated theory of social cognition, applicable to robots
 
-A principled yet workable approach to social cognition for artificial intelligence
+A principled yet practical approach to social cognition for artificial intelligence
 
 
 \subsection{Problem Statement}
@@ -100,15 +182,31 @@ We must immediately clarify that, even though this goal may seem to pre-suppose
 not have evidence that a particular kind of computational structure may better
 support the representation and manipulation of mental representations.
 
+\subsection{What is not adequately solved by current techniques?}
+
+[give concrete examples of social situations that are not easily achieveable
+with current (symbolic or not) approaches]
+
+[this examples should be turned into predictions for what our proposal should be
+able to achieve]
+
 \subsection{From Social Attention to Social Modelling}
 
 The hypothesis that we hereafter develop and turn into a cognitive model is the
-following: mental representations are snapshots of awareness, awareness being
-itself a label for the memory-mediated process of attention.
+following: \textbf{mental representations are snapshots of awareness, awareness being
+itself a label for the memory-mediated process of attention}.
 
-This extends to social cognition: modelling others' mental representations is
-taking snapshots of their attention process, \emph{mediated by my own
-attentional system}.
+This extends to social cognition: \textbf{modelling others' mental representations is
+taking snapshots of their current state of awareness}. As we do not have direct
+access to others' process of attention, it has to be mediated. We suggest that
+\textbf{modelling other's state of awareness is mediated by one's own
+attentional system, through joint attention mechanisms}.
+
+This results in the following set of hypotheses:
+
+\begin{itemize}
+    \item \textbf{H1}: 
+\end{itemize}
 
 
 \subsection{Surface Alignment vs Deep Grounding}
@@ -129,6 +227,11 @@ Establishment of full common ground is, we argue, a specialized and
 non-automatic process that is used primarily in times of difficulty (when
 radical misalignment becomes apparent).~\citep[p.179]{pickering2006alignment}
 \end{quote}
+
+
+analysis of behavioural alignment between partners (via
+metrics like the recently proposed \emph{Individual Motor
+Signature}~\cite{slowinski2016dynamic})
 
 \subsection{Theory of Mind}
 
@@ -264,8 +367,19 @@ Attention}~\cite{desimone1995neural}.
 Implemented using a particular \emph{Associative Memory Network} with an
 additional top-down biasing mechanism.
 
+\subsubsection{Memory-mediated Attention}
 
-\begin{figure}
+\emph{Attention} is modelled as the set of activated units in an associative
+memory network.
+
+
+Interplay between multi-modal social cues on one hand, and priming of previously activated physical
+entities (objects, agents) and 
+
+Attention
+
+
+\begin{figure}[h!]
     \centering
         \resizebox{0.7\linewidth}{!}{%
         \begin{tikzpicture}[
@@ -325,6 +439,7 @@ What do we call the \emph{attention state} of a partner?
 
 Grazino~\cite{graziano2013consciousness}: ``the mental machinery to model
 someone else attentional state is the same as the one used for oneself.''
+
 ``In both case, the purpose is understanding and predicting one's behaviour.''
 
 Cues from which we reconstruct someone else's attentional state (from Graziano):
@@ -345,9 +460,17 @@ Cues from which we reconstruct someone else's attentional state (from Graziano):
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{What Does the Model Predict?}
 
+\subsection{Protodeclarative pointing}
+
+Protoimperative vs protodeclarative pointing~\cite{baron1986perceptual}
+
 \subsection{Behavioural Alignment}
 \subsection{Verbalization of the (Social) Attentional Process}
 \subsection{False-beliefs}
+
+
+Picture ordering protocol, with \emph{mechanical}, \emph{behavioural} and
+\emph{intentional} sequences~\cite{baron1986mechanical}
 
 \subsection{Symbol Grounding}
 
@@ -360,6 +483,10 @@ This should work \emph{Attention Schema} theory because the attention schema
 is seen as a regular sensory
 representation~\citep[p.55]{graziano2013consciousness}.
 
+\subsection{Adapted behaviour to the interacting agent}
+
+A robot facing a baby, a 3 years old, a 5 years old, a 13 years old or an adult
+should behave differently.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -367,6 +494,7 @@ representation~\citep[p.55]{graziano2013consciousness}.
 \section{The Functional Pre-Requisites for Social Robots}
 
 \subsection{Social Assessment}
+
 \subsubsection{Gaze Direction}
 \subsubsection{Facial and Body Expressions}
 \subsubsection{Gestures}
