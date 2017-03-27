@@ -17,105 +17,51 @@
 \newcommand{\etc}{etc.\xspace}
 \newcommand{\vs}{\textit{vs.}\xspace}
 
-\title{From Social Attention to Social Modelling in Robotics:\\ The Robotic Social Awareness Model}
+\graphicspath{{figs/}}
 
-\author{Séverin Lemaignan}
+\title{The robot who pretend-played with me}
+
+
+\author{Séverin Lemaignan, Tony Belpaeme}
 
 \date{\today}
 
 \begin{document}
 \maketitle
 
+Alternative titles:
+
+\begin{itemize}
+    \item Can I have real fun playing with my robot?
+    \item A Window Onto Your Mind: Playful Robots Leveraging Attention to
+        Predict Actions
+    \item Playing Like your Friend: Dealing with the High Dimensionality of
+        Real-World Social Dynamic
+
+\end{itemize}
+
 \begin{abstract}
 
-My current perspective could be summarized as:
+    This article presents how attention tracking enables a robot to first automatically segment
+    a social interaction into meaningful situations (\emph{situation awareness}), and
+    second, to predict the participants' actions.
 
-1- mental representations are snapshots of what we are aware of;
-
-2- awareness is the label we conveniently put on the process of attention;
-
-3- attention at time t is the label we put on the set of the activated units in
-a (biased) associative memory network;
-
-4- modelling others’ mental representations is taking snapshots of their own
-current state of awareness;
-
-5- modelling other’s state of awareness, ie, their current attentional process,
-is mediated by one’s own attentional system, typically through joint attention
-mechanisms;
-
-6- Points 1 to 5 essentially refer to a 'phenomenal' awareness (a 'raw' inner
-experience). 'Phenomenal' awareness can be turned into 'access' consciousness
-(the abstract, cognitive ability to reflect on the inner experience);
-
-7- In robots, 'access consciousness' can be mapped to symbolic, logic
-representations.
-
-(2) is Graziano's Attention Schemata Theory; (3) is based on Biased Competition
-Model of Attention, Desimone and Duncan 1995; (6) comes from Block 1996.
-
-As you hopefully see, this drafts a sub-symbolic/symbolic hybrid model of
-cognition that puts (social) attention at the centre of social cognition.
-
-Some of the main 'gaps' are:
-
-- mental representations are likely not simply instantaneous 'snapshots' --
-even though I could argue that they indirectly embed a notion of time and
-history as they are snapshots of activated units in an associative memory
-network;
-
-- equating attention to a set of activated units in a memory network raises
-questions regarding the nature of these units: physical entities? active
-interaction modalities? ...? In particular, the right level of abstraction of
-these units is not immediately clear: the spectrum is rather large, from raw
-perceptual inputs 'à la Tony Morse' to high-level units like objects, joint
-gazing, etc.
-
-- the Biased Competition Model of Attention supports interesting bottom-up and
-top-down biasing mechanisms: bottom-up is quite clear (if a unit is activated
-longer/stronger, it biases the resulting attention to this unit. Top-down is
-less clear (but also potentially very interesting as it closes the loop between
-the sub-symbolic and symbolic models): how more abstract cognitive process can
-influence the memory network to bias the attention process?
-
-- the access to other's mental representations is mediated by one's own
-attentional system: the consequences of this mediation are not immediately
-clear
-
-- I conveniently map the split between 'phenomenal consciousness' and 'access
-consciousness' respectively to sub-symbolic and symbolic computational
-structures. This need to be better evidenced, if only because the frontier
-between phenomenal and access consciousness is all be clear (as pointed by
-Graziano).
-
-- It is not yet clear how the sub-symbolic and symbolic models of the different
-agent co-exist: is each agent a different unit in the same associative network?
-one associative memory per agent? what about the symbolic level?
-
-Now, as we discussed many times, the model is of little interest if it does not
-have some predictive power.
-
-Here a few social behaviours that I would like a robot to exhibit if endowed
-with such a model -- Not proper predictions, though.
-
-- behavioural alignment -> surface alignment and/or global alignment -> the
-original 'maze' task by Pickering and Garrod is certainly relevant here: every
-time you play the same game with the same person, the interaction is more fluid
-- ability to pass false-belief tasks, including non-physical, abstract ones, -
-recursive awareness: being aware of being aware -- typically evidenced by being
-able to describe/verbalize its own state of awareness - 'natural' turn-taking:
-I 'just' know when it is my turn to act - 'natural' protodeclarative pointing:
-I 'just' know when I really need to draw your attention on something
-
-The word 'just' is clearly the key here: these capabilities should be natural
-in the sense that they naturally follow from the model. 
+    We study this effect in a high-dimensional social interaction situation based on
+    free dramatic play: pairs of children (4-7 years old) or robot and child are
+    invited to freely interact with characters and items on an interactive
+    table, telling and acting stories with no explicit preset goal.
+    
+    Although the actions performed by the children are not known beforehand, our
+    approach allows the robot to segment on the fly the interaction flow into
+    episodes whose main focus can be predicted and used to generate pro-social
+    behaviours.
 
 \end{abstract}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{What do we aim for?}
+
+\section{Introduction}
+
+\subsection{Mutual Modelling: Theoretical Background}
 
 Human social dynamics rely upon the ability to effectively attribute beliefs,
 goals and percepts to other people. This set of meta-representational abilities
@@ -134,8 +80,148 @@ An integrated theory of social cognition, applicable to robots
 
 A principled yet practical approach to social cognition for artificial intelligence
 
+\subsubsection{Pretense}
 
-\subsection{Problem Statement}
+A second direction for the 'meta-cognitive foundations of mind modelling' is
+Leslie's paper on the role of pretense~\cite{leslie1987pretense}.
+
+\subsubsection{Surface Alignment vs Deep Grounding}
+
+Pickering and Garrod~\cite{pickering2006alignment} argue that mutual understanding
+starts mostly with a \emph{superficial alignment} at the level of the linguistic
+representations, due to priming mechanisms, and that this local alignment may --
+in some cases -- lead to a \emph{global alignment} of the semantic level
+(\emph{deep grounding}).  For these authors, the convergence in dialogue, and
+even the repair of some misunderstandings, is explained by this mimetic behavior
+more than by a monitoring of each other's knowledge:
+
+\begin{quote}
+[\ldots] interlocutors do
+not need to monitor and develop full common ground as a regular, constant
+part of routine conversation, as it would be unnecessary and far too costly.
+Establishment of full common ground is, we argue, a specialized and
+non-automatic process that is used primarily in times of difficulty (when
+radical misalignment becomes apparent).~\citep[p.179]{pickering2006alignment}
+\end{quote}
+
+
+analysis of behavioural alignment between partners (via
+metrics like the recently proposed \emph{Individual Motor
+Signature}~\cite{slowinski2016dynamic})
+
+\subsubsection{Theory of Mind}
+
+We previously covered the state of the research on theory of mind in social
+robotics~\cite{lemaignan2015mutual}.
+
+In~\cite{scassellati2002theory}, Scassellati gave
+an initial account of Leslie's and Baron-Cohen's respective models of the
+emergence of a theory of mind (we discuss them below) from the perspective of
+robotics, but reported implementation work was limited to simple perceptual
+precursors (like face detection or color saliencies detection). Since then,
+research in this field has been focused on applications relying on Flavell's
+\emph{Level 1}~\cite{flavell1977development} perspective-taking, \ie
+perspective-taking that only requires perceptual abilities (``\emph{I see (you do
+not see the book)}''), and actually mostly limited to visual perception (relevant
+work include Breazeal~\cite{breazeal2006using}, Trafton~\cite{Trafton2005} and
+Ros~\cite{Ros2010}).
+
+Based on perspective taking \emph{Level 1} alone, Breazeal
+\etal\cite{breazeal2009embodied} and Warnier \etal\cite{warnier2012when}
+successfully tackled the classical hallmark of theory of mind, the false belief
+experiment (also known as the ``Sally and Anne'' experiment, introduced
+by~\cite{wimmer1983beliefs}, original experimental setting
+by~\cite{baron1985does}). They demonstrated complete human-robot interaction
+scenarios where robots recognize and handle false belief situations in dyadic or
+triadic interactions, and exhibit helping behaviours that account for the
+missing/false beliefs of the human partners.
+
+\cite{devin2016implemented}
+
+\subsubsection{Connections vs. representations}
+\label{connection-representation}
+
+In~\cite{flavell1990developmental}, Flavell relates perspective taking
+\emph{Level 1} to establishing \emph{cognitive connections} (I see, I hear, I
+want, I like, I fear...), in contrast to perspective taking \emph{Level 2} that
+relates to manipulating \emph{representations}.  This is exemplified by
+\emph{appearance-reality} tasks, like the \emph{elephant mask} experiment
+proposed in~\cite{flavell1990developmental}: 3-years old children are not able
+to tell that an experimenter hidden behind a large elephant mask but who speaks
+normally \emph{looks} like an elephant, \emph{sounds} like the experimenter, and
+\emph{really is} the experimenter.  It appears that, while those children are
+able to explicitly manipulate cognitive connections (they know for instance that
+these are largely independent of each other and that they can evolve over time)
+and know as well that their own connections are independent of those of other
+people, they do not think that one concept can \emph{seriously} (\ie non
+playfully) hold several, possibly conflicting, representations.
+
+\subsection{Attention in Robotics}
+
+
+\section{Methodology: Social Interaction during Free Play}
+
+
+The study of the emergence of social behaviour is often intrinsically limited by
+the nature of the experimental tasks. We introduce a new
+experimental paradigm based on free play interactions. Where traditional
+socio-cognitive tasks are either toy scenarios (\ie they do not adequately
+mirror real-world situations) or simple, constrained tasks that do not reflect
+the complexity and dynamics of real-world interactions, free play social
+interactions exhibit a rich set of natural cognitive and social dynamics that
+are desirable for this research.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{setup.png}
+    \caption{The free play social interactions sandbox}
+    \label{fig|setup}
+\end{figure}
+
+To mitigate the technical challenges presented by free play interactions (like
+high dimensionality and uncertainties), we have developped a  \emph{free
+play sandbox}~\ref{fig|setup}: open-ended and non-directive activities, yet sufficiently
+defined to be reproducible; focus on abstract socio-cognitive facets (robot
+perception and manipulation are simplified); well suited for qualitative and
+quantitative analysis using metrics like Słowinski’s Individual Motor Signature
+(for behavioural alignment), Ballard’s coding of children’s free-play
+interactions, with-me-ness (for assessment of co-engagment).
+
+
+\subsection{Free play task}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{sandbox}
+    \caption{Example of a game situation: the child and the robot `build'
+    together a zoo. The animals and the blocks can be dragged over the whole
+    play area, while the background picture is static and purely decorative.}
+    \label{fig|sandbox}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{sandbox-release-cheetah}
+    \caption{Possible play situation: the child decides to release the cheetah
+    and creates a story where the cheetah scares away the visitors.}
+    \label{}
+\end{figure}
+
+\subsection{Data Analysis}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{analysis}
+    \caption{Screenshot of the interaction analysis tool: faces of the two
+    children are recorded, as well as any interaction occuring on the
+    interactive table.}
+    \label{fig|analysis}
+\end{figure}
+
+\section{Discussion: Towards a Model of Socio-Cognitive Awareness for Robots}
+
+\subsection{The classical approach}
 
 
 Symbolic approaches to social cognition work by first building a mental model of the
@@ -182,7 +268,7 @@ We must immediately clarify that, even though this goal may seem to pre-suppose
 not have evidence that a particular kind of computational structure may better
 support the representation and manipulation of mental representations.
 
-\subsection{What is not adequately solved by current techniques?}
+[What is not adequately solved by current techniques?]
 
 [give concrete examples of social situations that are not easily achieveable
 with current (symbolic or not) approaches]
@@ -190,102 +276,6 @@ with current (symbolic or not) approaches]
 [this examples should be turned into predictions for what our proposal should be
 able to achieve]
 
-\subsection{From Social Attention to Social Modelling}
-
-The hypothesis that we hereafter develop and turn into a cognitive model is the
-following: \textbf{mental representations are snapshots of awareness, awareness being
-itself a label for the memory-mediated process of attention}.
-
-This extends to social cognition: \textbf{modelling others' mental representations is
-taking snapshots of their current state of awareness}. As we do not have direct
-access to others' process of attention, it has to be mediated. We suggest that
-\textbf{modelling other's state of awareness is mediated by one's own
-attentional system, through joint attention mechanisms}.
-
-This results in the following set of hypotheses:
-
-\begin{itemize}
-    \item \textbf{H1}: 
-\end{itemize}
-
-
-\subsection{Surface Alignment vs Deep Grounding}
-
-Pickering and Garrod~\cite{pickering2006alignment} argue that mutual understanding
-starts mostly with a \emph{superficial alignment} at the level of the linguistic
-representations, due to priming mechanisms, and that this local alignment may --
-in some cases -- lead to a \emph{global alignment} of the semantic level
-(\emph{deep grounding}).  For these authors, the convergence in dialogue, and
-even the repair of some misunderstandings, is explained by this mimetic behavior
-more than by a monitoring of each other's knowledge:
-
-\begin{quote}
-[\ldots] interlocutors do
-not need to monitor and develop full common ground as a regular, constant
-part of routine conversation, as it would be unnecessary and far too costly.
-Establishment of full common ground is, we argue, a specialized and
-non-automatic process that is used primarily in times of difficulty (when
-radical misalignment becomes apparent).~\citep[p.179]{pickering2006alignment}
-\end{quote}
-
-
-analysis of behavioural alignment between partners (via
-metrics like the recently proposed \emph{Individual Motor
-Signature}~\cite{slowinski2016dynamic})
-
-\subsection{Theory of Mind}
-
-We previously covered the state of the research on theory of mind in social
-robotics~\cite{lemaignan2015mutual}.
-
-In~\cite{scassellati2002theory}, Scassellati gave
-an initial account of Leslie's and Baron-Cohen's respective models of the
-emergence of a theory of mind (we discuss them below) from the perspective of
-robotics, but reported implementation work was limited to simple perceptual
-precursors (like face detection or color saliencies detection). Since then,
-research in this field has been focused on applications relying on Flavell's
-\emph{Level 1}~\cite{flavell1977development} perspective-taking, \ie
-perspective-taking that only requires perceptual abilities (``\emph{I see (you do
-not see the book)}''), and actually mostly limited to visual perception (relevant
-work include Breazeal~\cite{breazeal2006using}, Trafton~\cite{Trafton2005} and
-Ros~\cite{Ros2010}).
-
-Based on perspective taking \emph{Level 1} alone, Breazeal
-\etal\cite{breazeal2009embodied} and Warnier \etal\cite{warnier2012when}
-successfully tackled the classical hallmark of theory of mind, the false belief
-experiment (also known as the ``Sally and Anne'' experiment, introduced
-by~\cite{wimmer1983beliefs}, original experimental setting
-by~\cite{baron1985does}). They demonstrated complete human-robot interaction
-scenarios where robots recognize and handle false belief situations in dyadic or
-triadic interactions, and exhibit helping behaviours that account for the
-missing/false beliefs of the human partners.
-
-\cite{devin2016implemented}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Foundations of the Socio-cognitive Awareness for Robots}
-
-\subsection{Connections vs. representations}
-\label{connection-representation}
-
-In~\cite{flavell1990developmental}, Flavell relates perspective taking
-\emph{Level 1} to establishing \emph{cognitive connections} (I see, I hear, I
-want, I like, I fear...), in contrast to perspective taking \emph{Level 2} that
-relates to manipulating \emph{representations}.  This is exemplified by
-\emph{appearance-reality} tasks, like the \emph{elephant mask} experiment
-proposed in~\cite{flavell1990developmental}: 3-years old children are not able
-to tell that an experimenter hidden behind a large elephant mask but who speaks
-normally \emph{looks} like an elephant, \emph{sounds} like the experimenter, and
-\emph{really is} the experimenter.  It appears that, while those children are
-able to explicitly manipulate cognitive connections (they know for instance that
-these are largely independent of each other and that they can evolve over time)
-and know as well that their own connections are independent of those of other
-people, they do not think that one concept can \emph{seriously} (\ie non
-playfully) hold several, possibly conflicting, representations.
 
 
 \subsection{Phenomenal \vs Access Consciousness}
@@ -314,7 +304,18 @@ Recursivity of consciousness: if I'm looking at a green apple, my cognitive
 machinery can decide and report that I'm aware of green. I can also be aware of
 the deciding and aware of the reporting~\citep[p.55]{graziano2013consciousness}.
 
-\subsection{The Attention Schema Theory}
+\subsection{From Social Attention to Social Modelling: the Attention Schema Theory}
+
+The hypothesis that we hereafter develop and turn into a cognitive model is the
+following: \textbf{mental representations are snapshots of awareness, awareness being
+itself a label for the memory-mediated process of attention}.
+
+This extends to social cognition: \textbf{modelling others' mental representations is
+taking snapshots of their current state of awareness}. As we do not have direct
+access to others' process of attention, it has to be mediated. We suggest that
+\textbf{modelling other's state of awareness is mediated by one's own
+attentional system, through joint attention mechanisms}.
+
 
 Our approach draws form the \emph{Attention Schema Theory}, proposed by
 Grazino~\cite{graziano2013consciousness}.
@@ -323,23 +324,6 @@ What awareness can do? ``the brain \emph{does} attention, but \emph{knows}
 awareness'': as such, ``awareness can in principle be verbally reported''.
 
 
-
-\subsection{Associative Memory Networks}
-
-
-In particular, used for behavioural alignment
-
-\subsection{Semantic Networks}
-
-Ontologies and other Knowledge Representation and Reasoning systems.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{The Robotic Social Awareness Model}
-
-\subsection{Overview}
 
 Associative Memory as an Informational Proxy for the Attention System
 
@@ -360,14 +344,14 @@ Associative Memory as an Informational Proxy for the Attention System
 
 \end{enumerate}
 
-\subsection{Attention}
+\paragraph{Attention}
 
 Modelled as a \emph{Biased Competition Model of
 Attention}~\cite{desimone1995neural}.
 Implemented using a particular \emph{Associative Memory Network} with an
 additional top-down biasing mechanism.
 
-\subsubsection{Memory-mediated Attention}
+\paragraph{Memory-mediated Attention}
 
 \emph{Attention} is modelled as the set of activated units in an associative
 memory network.
@@ -416,7 +400,7 @@ Attention
 
 
 
-\subsubsection{Biasing Mechanisms}
+\paragraph{Biasing Mechanisms}
 
 Biasing competition~\cite{beck2009top}
 
@@ -432,7 +416,7 @@ high-level processes is unclear, but might be of symbolic nature.
 
 
 
-\subsection{Social Attention}
+\paragraph{Social Attention}
 
 What do we call the \emph{attention state} of a partner?
 
@@ -451,30 +435,23 @@ Cues from which we reconstruct someone else's attentional state (from Graziano):
     \item location of salient objects
 \end{itemize}
 
-\subsection{What is the contribution, the novelty?}
+\subsection{What Does the Model Predict?}
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{What Does the Model Predict?}
-
-\subsection{Protodeclarative pointing}
+\paragraph{Protodeclarative pointing}
 
 Protoimperative vs protodeclarative pointing~\cite{baron1986perceptual}
 
-\subsection{Behavioural Alignment}
-\subsection{Verbalization of the (Social) Attentional Process}
-\subsection{False-beliefs}
+\paragraph{Behavioural Alignment}
+\paragraph{Verbalization of the (Social) Attentional Process}
+\paragraph{False-beliefs}
 
 
 Picture ordering protocol, with \emph{mechanical}, \emph{behavioural} and
 \emph{intentional} sequences~\cite{baron1986mechanical}
 
-\subsection{Symbol Grounding}
+\paragraph{Symbol Grounding}
 
-\subsection{Recursive Awareness}
+\paragraph{Recursive Awareness}
 
 I can describe what I'm aware of, I can also recursively be aware I'm describing
 my state of awareness, and I can verbalize this second order awareness.
@@ -483,36 +460,16 @@ This should work \emph{Attention Schema} theory because the attention schema
 is seen as a regular sensory
 representation~\citep[p.55]{graziano2013consciousness}.
 
-\subsection{Adapted behaviour to the interacting agent}
+\paragraph{Adapted behaviour to the interacting agent}
 
 A robot facing a baby, a 3 years old, a 5 years old, a 13 years old or an adult
 should behave differently.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Functional Pre-Requisites for Social Robots}
 
-\subsection{Social Assessment}
-
-\subsubsection{Gaze Direction}
-\subsubsection{Facial and Body Expressions}
-\subsubsection{Gestures}
-
-\subsection{Situation Assessment}
-
-Including saliency information
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Evaluation of the Model}
-
-\subsection{Does it perform as well as Symbolic Architectures?}
-\subsection{Comparison with Symbolic Situation Assessment}
+\paragraph{Parten's stages of play}
 
 
-
+\section{Conclusion}
 
 \bibliographystyle{plain}
 \bibliography{biblio}
