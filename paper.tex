@@ -33,6 +33,8 @@ Alternative titles:
 
 \begin{itemize}
     \item Can I have real fun playing with my robot?
+    \item A Robot Which is Fun to Play With: Leveraging AI to Participate in Complex
+        Social Situations
     \item A Window Onto Your Mind: Playful Robots Leveraging Attention to
         Predict Actions
     \item Playing Like your Friend: Dealing with the High Dimensionality of
@@ -49,8 +51,8 @@ Alternative titles:
     We study this effect in a high-dimensional social interaction situation based on
     free dramatic play: pairs of children (4-7 years old) or robot and child are
     invited to freely interact with characters and items on an interactive
-    table, telling and acting stories with no explicit preset goal.
-    
+    table, telling and acting stories with no explicit goal set in advance.
+
     Although the actions performed by the children are not known beforehand, our
     approach allows the robot to segment on the fly the interaction flow into
     episodes whose main focus can be predicted and used to generate pro-social
@@ -182,8 +184,9 @@ play}~\cite{parten1932social}:
 
 
 
-\section{Methodology: Social Interaction during Free Play}
+\section{Social Interaction during Free Play}
 
+\subsection{A novel methodology}
 
 The study of the emergence of social behaviour is often intrinsically limited by
 the nature of the experimental tasks. Where traditional
@@ -273,6 +276,7 @@ and the theme of the game items.
 \subsection{Forms of play elicited by the sandbox}
 
 \begin{itemize}
+    \item dramatic play
     \item storytelling
     \item creative play
     \item pretend play
@@ -300,6 +304,147 @@ and the theme of the game items.
     \label{}
 \end{figure}
 
+\subsection{Implementation}
+
+The sandbox is implemented using mainly two frameworks: the Qt's \emph{QtQuick} framework
+for the graphical interface of the game, and the \emph{Robot Operating System}
+(ROS) for the modular implementation of the data processing and behaviour
+generation pipelines.
+
+Figure~\ref{fig|architecture} presents the software architecture of the sandbox.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{freeplay-sandbox-architecture}
+\label{fig|architecture}
+\caption{Architecture of the free play sandbox. Yellow nodes represent
+    hardware (cameras and robot); purple nodes relate to the game interface;
+    red nodes manage the robot; the green node implements the game policy (when
+    the robot is playing); blue nodes relates to visual attention tracking.}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{rviz-sandtray}
+    \caption{The freeplay sandbox, viewed at runtime within ROS RViz
+    visualisation tool.}
+    \label{fig|rviz}
+\end{figure}
+
+
+\section{Research Questions and Hypotheses}
+
+The mechanisms underlying the social interactions happening during free play
+raise important questions for social robotics.
+
+
+\subsection{Game Dynamics}
+
+\begin{itemize}
+    \item do we observe a sequence of sub-games?
+    \item how are these sub-games initiated?
+    \item how does A keep track of what B is playing at?
+    \item how do we segment the action flow into meaningful play situations?
+\end{itemize}
+
+\subsection{Social Dynamics}
+
+\begin{itemize}
+    \item does a ``social protocol'' establish?
+    \item if so, what are these social rules?
+    \item implicit vs explicit rule setting?
+    \item what interaction modalities (or combination thereof) are relied upon
+        to establish and maintain this ``social protocol''?
+\end{itemize}
+
+\subsection{Mental representations}
+
+\begin{itemize}
+    \item Does A know what B is thinking of at time t?
+    \item Do the participants perform explicit grounding of their respective mental models
+        (ie, ask the other one what she is doing/thinking/planning to do?)
+    \item How does the implicit grounding take place? attention tracking?
+    \item Do we need at all to know what the other intends to do to actually
+        collaborate? surface alignment vs deep grounding
+    \item Procedural (how do you do it?) vs Semantic
+        grounding (what are you doing? playing at?)
+\end{itemize}
+
+\subsection{Interplay between these questions}
+
+\begin{figure}
+\centering
+
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+                font=\sffamily,
+                >=latex,
+                every edge/.style={draw, very thick},
+                node/.style={draw, rounded corners, align=center, inner sep=5pt, fill=black!20},
+                label/.style={midway, align=center, font=\scriptsize\sffamily, fill=white}]
+
+    %%% NODES
+    \node [node] (mentalrepresentations) {Mental Representations};
+    \node [above left=of mentalrepresentations] (gameactions) {game actions};
+    \node [node, above left=of gameactions] (gamedynamics) {Game dynamics};
+    \node [above right=of mentalrepresentations] (socialactions) {social actions};
+    \node [node, above right=of socialactions ] (socialdynamics) {Social Dynamics};
+
+    %%% CONNECTIONS
+    \path (gamedynamics) edge [<->, dashed] node[label, above] {?}(socialdynamics);
+    \path (gamedynamics) edge [<-, bend right] node[label] {mediate}(gameactions);
+    \path (socialactions) edge [->, bend left] node[label] {reflect}(mentalrepresentations);
+    \path (socialactions) edge [->, dashed] node[label,above] {?}(gamedynamics);
+    \path (gameactions) edge [->, dashed] node[label,above] {?}(socialdynamics);
+    \path (gameactions) edge [->, bend right] node[label] {reflect}(mentalrepresentations);
+    \path (socialdynamics) edge [<-, bend left] node[label] {shape}(socialactions);
+
+\end{tikzpicture}
+}
+\label{fig|researchquestions}
+\caption{Game dynamics, social dynamics and mental representations are linked
+    with each other through social actions (implicit and explicit communication)
+    and actions on the environment (mainly game actions)}
+\end{figure}
+
+\subsection{Hypotheses}
+
+\paragraph{Protodeclarative pointing}
+
+Protoimperative vs protodeclarative pointing~\cite{baron1986perceptual}
+
+\paragraph{Behavioural Alignment}
+\paragraph{Verbalization of the (Social) Attentional Process}
+\paragraph{False-beliefs}
+
+
+Picture ordering protocol, with \emph{mechanical}, \emph{behavioural} and
+\emph{intentional} sequences~\cite{baron1986mechanical}
+
+\paragraph{Symbol Grounding}
+
+\paragraph{Recursive Awareness}
+
+I can describe what I'm aware of, I can also recursively be aware I'm describing
+my state of awareness, and I can verbalize this second order awareness.
+
+This should work \emph{Attention Schema} theory because the attention schema
+is seen as a regular sensory
+representation~\citep[p.55]{graziano2013consciousness}.
+
+\paragraph{Adapted behaviour to the interacting agent}
+
+A robot facing a baby, a 3 years old, a 5 years old, a 13 years old or an adult
+should behave differently.
+
+
+\paragraph{Parten's stages of play}
+
+
+\section{Experiments}
+
+\subsection{Procedure}
+
 \subsection{Data Analysis}
 
 \begin{figure}
@@ -310,6 +455,8 @@ and the theme of the game items.
     interactive table.}
     \label{fig|analysis}
 \end{figure}
+
+\subsection{Results}
 
 \section{Discussion: Towards a Model of Socio-Cognitive Awareness for Robots}
 
@@ -526,39 +673,6 @@ Cues from which we reconstruct someone else's attentional state (from Graziano):
     \item prior knowledge of person
     \item location of salient objects
 \end{itemize}
-
-\subsection{What Does the Model Predict?}
-
-\paragraph{Protodeclarative pointing}
-
-Protoimperative vs protodeclarative pointing~\cite{baron1986perceptual}
-
-\paragraph{Behavioural Alignment}
-\paragraph{Verbalization of the (Social) Attentional Process}
-\paragraph{False-beliefs}
-
-
-Picture ordering protocol, with \emph{mechanical}, \emph{behavioural} and
-\emph{intentional} sequences~\cite{baron1986mechanical}
-
-\paragraph{Symbol Grounding}
-
-\paragraph{Recursive Awareness}
-
-I can describe what I'm aware of, I can also recursively be aware I'm describing
-my state of awareness, and I can verbalize this second order awareness.
-
-This should work \emph{Attention Schema} theory because the attention schema
-is seen as a regular sensory
-representation~\citep[p.55]{graziano2013consciousness}.
-
-\paragraph{Adapted behaviour to the interacting agent}
-
-A robot facing a baby, a 3 years old, a 5 years old, a 13 years old or an adult
-should behave differently.
-
-
-\paragraph{Parten's stages of play}
 
 
 \section{Conclusion}
