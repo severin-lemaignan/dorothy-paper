@@ -19,7 +19,7 @@
 
 \graphicspath{{figs/}}
 
-\title{The robot who pretend-played with me}
+\title{Generalized Social Dynamics in Human-Robot Interaction}
 
 
 \author{Séverin Lemaignan, Tony Belpaeme}
@@ -29,39 +29,52 @@
 \begin{document}
 \maketitle
 
+
+\begin{abstract}
+
+Relying on free play as a prototypical open task, we investigate the social
+dynamics of children dyads playing together. By analyzing them from the
+perspective of artifical socio-cognition and human-robot interaction, we
+evidence key social patterns and show that robots can recognise them,
+interpret them, and (where applicable) generate them in a task-agnostic
+fashion. By subsequently reusing these social patterns in similar
+child-robot free play situations, we show a significant increase of the
+interaction duration.
+
+\end{abstract}
+
+
+\section{Introduction}
+
 Alternative titles:
 
 \begin{itemize}
-    \item Can I have real fun playing with my robot?
+    \item The robot who pretend-played with me
+    \item I Guess Your Next Move! Leveraging Social Cues for Robots to
+        Understand Free-play Situations
     \item A Robot Which is Fun to Play With: Leveraging AI to Participate in Complex
         Social Situations
     \item A Window Onto Your Mind: Playful Robots Leveraging Attention to
         Predict Actions
     \item Playing Like your Friend: Dealing with the High Dimensionality of
         Real-World Social Dynamic
+    \item A Robot Which Adapts its Social Behaviour to its Partner's Age
 
 \end{itemize}
 
-\begin{abstract}
+This article presents how attention tracking enables a robot to first
+automatically segment a social interaction into meaningful situations
+(\emph{situation awareness}), and second, to predict the participants' actions.
 
-    This article presents how attention tracking enables a robot to first automatically segment
-    a social interaction into meaningful situations (\emph{situation awareness}), and
-    second, to predict the participants' actions.
+We study this effect in a high-dimensional social interaction situation based on
+free dramatic play: pairs of children (4-7 years old) or robot and child are
+invited to freely interact with characters and items on an interactive table,
+telling and acting stories with no explicit goal set in advance.
 
-    We study this effect in a high-dimensional social interaction situation based on
-    free dramatic play: pairs of children (4-7 years old) or robot and child are
-    invited to freely interact with characters and items on an interactive
-    table, telling and acting stories with no explicit goal set in advance.
-
-    Although the actions performed by the children are not known beforehand, our
-    approach allows the robot to segment on the fly the interaction flow into
-    episodes whose main focus can be predicted and used to generate pro-social
-    behaviours.
-
-\end{abstract}
-
-
-\section{Introduction}
+Although the actions performed by the children are not known beforehand, our
+approach allows the robot to segment on the fly the interaction flow into
+episodes whose main focus can be predicted and used to generate pro-social
+behaviours.
 
 \subsection{Mutual Modelling: Theoretical Background}
 
@@ -226,7 +239,7 @@ defined to be reproducible;
 focus on abstract socio-cognitive facets (robot
 perception and manipulation are simplified); well suited for qualitative and
 quantitative analysis using metrics like Słowinski’s Individual Motor Signature
-(for behavioural alignment), Ballard’s coding of children’s free-play
+(for behavioural alignment), Anderson's~\cite{anderson2004social} coding of children’s free-play
 interactions, with-me-ness (for assessment of co-engagment).
 
 carefully framed: as far as possible, they ne-
@@ -400,10 +413,10 @@ raise important questions for social robotics.
 
     %%% NODES
     \node [node] (mentalrepresentations) {Mental Representations};
-    \node [above left=of mentalrepresentations] (gameactions) {game actions};
-    \node [node, above left=of gameactions] (gamedynamics) {Game dynamics};
-    \node [above right=of mentalrepresentations] (socialactions) {social actions};
-    \node [node, above right=of socialactions ] (socialdynamics) {Social Dynamics};
+    \node [above left=of mentalrepresentations] (gameactions) {\it game actions};
+    \node [node, above=of gameactions] (gamedynamics) {Game dynamics};
+    \node [above right=of mentalrepresentations] (socialactions) {\it social actions};
+    \node [node, above=of socialactions ] (socialdynamics) {Social Dynamics};
 
     %%% CONNECTIONS
     \path (gamedynamics) edge [<->, dashed] node[label, above] {?}(socialdynamics);
@@ -432,7 +445,7 @@ raise important questions for social robotics.
 
 \paragraph{Protodeclarative pointing}
 
-Protoimperative vs protodeclarative pointing~\cite{baron1986perceptual}
+Protoimperative vs protodeclarative pointing~\cite{baron1989perceptual}
 
 \paragraph{Behavioural Alignment}
 \paragraph{Verbalization of the (Social) Attentional Process}
